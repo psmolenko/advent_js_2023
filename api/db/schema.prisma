@@ -23,20 +23,24 @@ enum EUserStatus {
 }
 
 model User {
-  id           Int          @id @default(autoincrement())
-  email        String       @unique
-  firstName    String?
-  lastName     String?
-  avatar       String?
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  role         ERole        @default(USER)
-  status       UserStatus[]
-  santa        Pairings[]   @relation("Pairings_Santa")
-  person       Pairings[]   @relation("Pairings_Person")
-  wishList     WishList[]
-  thankYouFrom ThankYou[]   @relation("ThankYou_User")
-  thankYouTo   ThankYou[]   @relation("ThankYou_ToUser")
+  id                  Int          @id @default(autoincrement())
+  email               String       @unique
+  hashedPassword      String       @default("")
+  salt                String       @default("")
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  firstName           String?
+  lastName            String?
+  avatar              String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  role                ERole        @default(USER)
+  status              UserStatus[]
+  santa               Pairings[]   @relation("Pairings_Santa")
+  person              Pairings[]   @relation("Pairings_Person")
+  wishList            WishList[]
+  thankYouFrom        ThankYou[]   @relation("ThankYou_User")
+  thankYouTo          ThankYou[]   @relation("ThankYou_ToUser")
 }
 
 model UserStatus {
